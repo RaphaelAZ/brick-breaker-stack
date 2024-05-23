@@ -1,23 +1,25 @@
 class PaddleService {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
-    public height: number;
-    public width: number;
     public x: number;
+    public width: number;
+    public height: number;
+    private paddleSpeed: number;
     private rightPressed: boolean;
     private leftPressed: boolean;
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas;
-        this.ctx = canvas.getContext('2d')!;
-        this.height = 10;
+        this.ctx = this.canvas.getContext('2d')!;
         this.width = 75;
-        this.x = (canvas.width - this.width) / 2;
+        this.height = 10;
+        this.x = (this.canvas.width - this.width) / 2;
+        this.paddleSpeed = 7;
         this.rightPressed = false;
         this.leftPressed = false;
 
-        document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
-        document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
+        document.addEventListener('keydown', (e) => this.keyDownHandler(e), false);
+        document.addEventListener('keyup', (e) => this.keyUpHandler(e), false);
     }
 
     draw() {
@@ -30,24 +32,25 @@ class PaddleService {
 
     move() {
         if (this.rightPressed && this.x < this.canvas.width - this.width) {
-            this.x += 7;
-        } else if (this.leftPressed && this.x > 0) {
-            this.x -= 7;
+            this.x += this.paddleSpeed;
+        }
+        if (this.leftPressed && this.x > 0) {
+            this.x -= this.paddleSpeed;
         }
     }
 
     private keyDownHandler(e: KeyboardEvent) {
-        if (e.key === "Right" || e.key === "ArrowRight") {
+        if (e.key === 'Right' || e.key === 'ArrowRight') {
             this.rightPressed = true;
-        } else if (e.key === "Left" || e.key === "ArrowLeft") {
+        } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
             this.leftPressed = true;
         }
     }
 
     private keyUpHandler(e: KeyboardEvent) {
-        if (e.key === "Right" || e.key === "ArrowRight") {
+        if (e.key === 'Right' || e.key === 'ArrowRight') {
             this.rightPressed = false;
-        } else if (e.key === "Left" || e.key === "ArrowLeft") {
+        } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
             this.leftPressed = false;
         }
     }

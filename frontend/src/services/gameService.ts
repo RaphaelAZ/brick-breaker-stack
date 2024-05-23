@@ -1,20 +1,21 @@
-import Ball from './ballService';
-import Paddle from './paddleService';
-import Brick from './bricksService';
+import BallService from './ballService';
+import PaddleService from './paddleService';
+import BrickService from './brickService';
 
-class Game {
+class GameService {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
-    private paddle: Paddle;
-    private ball: Ball;
+    private paddle: PaddleService;
+    private ball: BallService;
     private brickRowCount: number;
     private brickColumnCount: number;
     private brickPadding: number;
     private brickOffsetTop: number;
     private brickOffsetLeft: number;
-    private bricks: Brick[][];
+    private bricks: BrickService[][];
     private isGameOver: boolean;
     private onGameOver: () => void;
+    public isGameRunning: boolean;
 
     constructor(onGameOver: () => void) {
         this.canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
@@ -22,16 +23,17 @@ class Game {
             throw new Error("Cannot find the canvas element");
         }
         this.ctx = this.canvas.getContext('2d')!;
-        this.paddle = new Paddle(this.canvas);
-        this.ball = new Ball(this.canvas, this.paddle);
+        this.paddle = new PaddleService(this.canvas);
+        this.ball = new BallService(this.canvas, this.paddle);
         this.isGameOver = false;
         this.onGameOver = onGameOver;
+        this.isGameRunning = true; // Set the initial state to running
 
         this.brickRowCount = 3;
-        this.brickColumnCount = 5;
+        this.brickColumnCount = 7;
         this.brickPadding = 10;
         this.brickOffsetTop = 30;
-        this.brickOffsetLeft = 30;
+        this.brickOffsetLeft = (this.canvas.width - (this.brickColumnCount * (75 + this.brickPadding) - this.brickPadding)) / 2;
 
         this.bricks = [];
         for (let c = 0; c < this.brickColumnCount; c++) {
@@ -39,7 +41,7 @@ class Game {
             for (let r = 0; r < this.brickRowCount; r++) {
                 let brickX = c * (75 + this.brickPadding) + this.brickOffsetLeft;
                 let brickY = r * (20 + this.brickPadding) + this.brickOffsetTop;
-                this.bricks[c][r] = new Brick(brickX, brickY);
+                this.bricks[c][r] = new BrickService(brickX, brickY);
             }
         }
 
@@ -64,7 +66,7 @@ class Game {
             for (let r = 0; r < this.brickRowCount; r++) {
                 let b = this.bricks[c][r];
                 if (b.status === 1) {
-                    if (this.ball.x > b.x && this.ball.x < b.x + b.width && this.ball.y > b.y && this.ball.y < b.y + b.height) {
+                    if (this.ball.x + this.ball.radius > b.x && this.ball.x - this.ball.radius < b.x + b.width && this.ball.y + this.ball.radius > b.y && this.ball.y - this.ball.radius < b.y + b.height) {
                         this.ball.dy = -this.ball.dy;
                         b.status = 0;
                     }
@@ -76,6 +78,7 @@ class Game {
     checkGameOver() {
         if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
             this.isGameOver = true;
+            this.isGameRunning = false; // Set the game running state to false
             this.onGameOver();
         }
     }
@@ -100,4 +103,4 @@ class Game {
     }
 }
 
-export default Game;
+export default GameService;

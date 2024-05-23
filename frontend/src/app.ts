@@ -1,4 +1,6 @@
 import { Manager } from "./manager";
 import "../scss/app.scss";
 
-new Manager();
+document.addEventListener('DOMContentLoaded', () => {
+    new Manager();
+});
