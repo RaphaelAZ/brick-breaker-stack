@@ -20,14 +20,14 @@ class GameService {
     constructor(onGameOver: () => void) {
         this.canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
         if (!this.canvas) {
-            throw new Error("Cannot find the canvas element");
+            throw new Error("Canvas introuvable");
         }
         this.ctx = this.canvas.getContext('2d')!;
         this.paddle = new PaddleService(this.canvas);
         this.ball = new BallService(this.canvas, this.paddle);
         this.isGameOver = false;
         this.onGameOver = onGameOver;
-        this.isGameRunning = true; // Set the initial state to running
+        this.isGameRunning = true;
 
         this.brickRowCount = 3;
         this.brickColumnCount = 7;
@@ -78,7 +78,7 @@ class GameService {
     checkGameOver() {
         if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
             this.isGameOver = true;
-            this.isGameRunning = false; // Set the game running state to false
+            this.isGameRunning = false;
             this.onGameOver();
         }
     }
