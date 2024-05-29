@@ -1,4 +1,4 @@
-export default class BackgroundService {
+export default class BackgroundComponent {
     private starCount: number;
     private stars: HTMLDivElement[];
 

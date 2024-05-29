@@ -1,6 +1,6 @@
-import BallService from './ballService';
-import PaddleService from './paddleService';
-import BrickService from './brickService';
+import BallService from '../components/ball-component';
+import PaddleService from '../components/paddle-component';
+import BrickService from '../components/brick-component';
 
 class GameService {
     private canvas: HTMLCanvasElement = document.getElementById('gameCanvas') as HTMLCanvasElement;

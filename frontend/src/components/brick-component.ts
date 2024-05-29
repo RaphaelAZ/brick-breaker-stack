@@ -1,4 +1,4 @@
-class BrickService {
+class BrickComponent {
     public x: number;
     public y: number;
     public width: number;
@@ -24,4 +24,4 @@ class BrickService {
     }
 }
 
-export default BrickService;
+export default BrickComponent;

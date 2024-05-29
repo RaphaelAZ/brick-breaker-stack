@@ -1,4 +1,4 @@
-class PaddleService {
+class PaddleComponent {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     public x: number;
@@ -56,4 +56,4 @@ class PaddleService {
     }
 }
 
-export default PaddleService;
+export default PaddleComponent;

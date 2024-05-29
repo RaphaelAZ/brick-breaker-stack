@@ -1,7 +1,7 @@
-import PaddleService from './paddleService';
-import GameService from './gameService';
+import PaddleService from './paddle-component';
+import GameService from '../services/gameService';
 
-class BallService {
+class BallComponent {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private paddle: PaddleService;
@@ -80,4 +80,4 @@ class BallService {
     }
 }
 
-export default BallService;
+export default BallComponent;

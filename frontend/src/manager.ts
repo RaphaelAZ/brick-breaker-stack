@@ -1,6 +1,6 @@
 import GameService from './services/gameService';
-import BackgroundService from './services/backgroundService';
-import { LeaderboardComponent } from './components/leaderboard-component';
+import BackgroundComponent from './components/background-component';
+import LeaderboardComponent from './components/leaderboard-component';
 
 export class Manager {
     private game: GameService | null;
@@ -8,14 +8,14 @@ export class Manager {
     private modal = document.getElementById('playerModal') as HTMLDivElement;
     private canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
     private gameOvertitle = document.getElementById('gameOvertitle') as HTMLDivElement;
-    private background: BackgroundService;
 
     constructor() {
-        this.background = new BackgroundService();
         this.game = null;
         this.nickname = null;
         
         this.initModal();
+        new BackgroundComponent();
+        new LeaderboardComponent();
     }
 
     private initModal(): void {
@@ -37,7 +37,6 @@ export class Manager {
 
         window.onload = () => {
             this.modal.style.display = 'block';
-            new LeaderboardComponent();
         };
     }
 

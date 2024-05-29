@@ -1,12 +1,13 @@
 import User from "../interfaces/User";
 import { apiService } from "../services/apiService";
 
-export class LeaderboardComponent {
-    private leaderboardElement: HTMLDivElement;
+export default class LeaderboardComponent {
+    private leaderboardElement: HTMLUListElement;
     private apiService = apiService;
 
     constructor() {
-        this.leaderboardElement = document.getElementById("leaderboard") as HTMLDivElement;
+        this.leaderboardElement = document.getElementById("leaderboard") as HTMLUListElement;
+        this.leaderboardElement.innerHTML = "";
         this.loadLeaderboard();
     }
 
