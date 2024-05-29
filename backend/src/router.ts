@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { userService } from "./services/userService";
+import { playerService } from "./services/playerService";
 
 export default class Router
 {
@@ -11,8 +11,8 @@ export default class Router
     }
 
     private bindRoutes() {
-        this.app.get('/test', (req, res) => {
-            userService.getUserById(2).then((user) => {
+        this.app.get('/leaderboard', (req, res) => {
+            playerService.getTopRanking().then((user) => {
                 res.send(user)
             })
         });

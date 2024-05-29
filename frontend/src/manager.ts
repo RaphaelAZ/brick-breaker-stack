@@ -1,5 +1,6 @@
 import GameService from './services/gameService';
 import BackgroundService from './services/backgroundService';
+import { LeaderboardComponent } from './components/leaderboard-component';
 
 export class Manager {
     private game: GameService | null;
@@ -36,6 +37,7 @@ export class Manager {
 
         window.onload = () => {
             this.modal.style.display = 'block';
+            new LeaderboardComponent();
         };
     }
 
@@ -52,12 +54,18 @@ export class Manager {
     }
 
     private gameStart(): void {
-        this.game = new GameService(() => this.onGameOver());
+        this.game = new GameService(score => this.onGameOver(score));
     }
 
-    private onGameOver(): void {
+    private onGameOver(score: number): void {
+        // On réaffiche la modal + game over
         this.modal.style.display = 'block';
         this.gameOvertitle.style.display = 'block';
+
+        const scoreElement = document.getElementById('gameOverScorePoints') as HTMLSpanElement;
+        scoreElement.innerHTML = score.toString();
+
+        // On désactive le canvas et on reset le jeu
         this.toggleCanvas(false);
         this.game = null;
     }

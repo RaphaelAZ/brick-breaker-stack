@@ -14,10 +14,11 @@ class GameService {
     private brickOffsetLeft: number;
     private bricks: BrickService[][];
     private isGameOver: boolean;
-    private onGameOver: () => void;
+    private onGameOver: (score: number) => void;
     public isGameRunning: boolean;
+    private score: number = 0;
 
-    constructor(onGameOver: () => void) {
+    constructor(onGameOver: (score) => void) {
         if (!this.canvas) {
             throw new Error("Une erreur est survenue, veuillez contacter un administrateur.");
         }
@@ -69,7 +70,7 @@ class GameService {
                         if (this.ball.x + this.ball.radius > b.x && this.ball.x - this.ball.radius < b.x + b.width && this.ball.y + this.ball.radius > b.y && this.ball.y - this.ball.radius < b.y + b.height) {
                             this.ball.dy = -this.ball.dy;
                             b.status = 0;
-                            console.log('Brick cassée');
+                            this.score+= 10;
                         }
                     }
                 }
@@ -97,7 +98,7 @@ class GameService {
     changeGameRunning() {
         this.isGameOver = true;
         this.isGameRunning = false;
-        this.onGameOver();
+        this.onGameOver(this.score);
     }
 }
 

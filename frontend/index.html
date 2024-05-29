@@ -10,13 +10,24 @@
 
     <div id="playerModal">
         <div id="playerModalContent">
-            <div class="gameOverTitle" id="gameOvertitle">
-                <h1>Game Over</h1>
-                <hr />
+            <div id="modalLeft">
+                <div class="gameNameTitle" id="gameNameTitle">
+                    <h1>Space Breaker</h1>
+                    <hr />
+                </div>
+                <label for="nicknameInput">Entrez votre pseudo</label>
+                <input type="text" id="nicknameInput" name="nicknameInput">
+                <button id="startGameButton">Commencer une partie</button>
             </div>
-            <label for="nicknameInput">Entrez votre pseudo</label>
-            <input type="text" id="nicknameInput" name="nicknameInput">
-            <button id="startGameButton">Commencer une partie</button>
+            <div id="modalRight">
+                <h2>Classement - Top 5</h2>
+                <ul id="leaderboard"></ul>
+                <div class="gameOverTitle" id="gameOvertitle">
+                    <h1>Game Over</h1>
+                    <span class="gameOverScore">Votre score : <span id="gameOverScorePoints"></span> pts</span>
+                    <hr />
+                </div>
+            </div>
         </div>
     </div>
 
