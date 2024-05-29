@@ -1,8 +1,37 @@
+
 # Space Breaker
 
-## Quick start
-### Prerequisites
-Please make sure you have an empty mysql db named "brickbreaker".
+## Démarrage
+Une fois le projet cloné, préparez l'installation en suivant les prérequis
 
-### Commands
-Once the prerequisites are met, you can paste the following commands in the terminal of your choice and in the correct repositories:
+### Prérequis
+  - Une base de données nommée "brickbreaker"
+  - Importer la structure de base de données via "brickbreaker.sql" situé à la racine du projet
+
+### Commandes
+Une fois les prérequis installés, vous pouvez coller ces commandes dans le terminal de votre choix et dans le bon répertoire:
+
+#### Répertoire backend :
+```shell
+npm install
+"Installing packages...";
+```
+
+```shell
+npm run start
+"Backend starting...";
+```
+
+#### Répertoire frontend :
+```shell
+npm install
+"Installing packages...";
+```
+
+```shell
+npm run start
+"Webpack compiling and starting frontend...";
+```
+
+### Lancement
+Après avoir installé les dépendances, vous pouvez lancer les serveurs backend et frontend avec les commandes appropriées.
