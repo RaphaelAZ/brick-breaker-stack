@@ -1,4 +1,4 @@
-import User from "../interfaces/User";
+import Player from "../interfaces/Player";
 import { apiService } from "../services/apiService";
 
 export default class LeaderboardComponent {
@@ -7,7 +7,9 @@ export default class LeaderboardComponent {
 
     constructor() {
         this.leaderboardElement = document.getElementById("leaderboard") as HTMLUListElement;
-        this.leaderboardElement.innerHTML = "";
+        
+        this.clearLeaderboard();
+
         this.loadLeaderboard();
     }
 
@@ -19,9 +21,13 @@ export default class LeaderboardComponent {
         });
     }
 
-    private displayTopPlayerScore(player: User) {
+    private displayTopPlayerScore(player: Player) {
         const topPlayer = document.createElement('li');
         topPlayer.innerText = `${player.name} - ${player.score}`;
         this.leaderboardElement.appendChild(topPlayer);
+    }
+
+    private clearLeaderboard() {
+        this.leaderboardElement.innerHTML = "";
     }
 }

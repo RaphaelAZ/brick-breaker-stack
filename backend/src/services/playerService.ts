@@ -11,6 +11,7 @@ class PlayerService
     }
 
     public async insertNewPlayer(newPlayer: Player): Promise<string> {
+        console.log(newPlayer);
         try {
             const r = await dbService.query("INSERT INTO players (name, score) VALUES (?, ?)", [newPlayer.name, newPlayer.score]);
             return r ? 'Success' : 'Error';

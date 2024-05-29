@@ -1,6 +1,8 @@
 import GameService from './services/gameService';
 import BackgroundComponent from './components/background-component';
 import LeaderboardComponent from './components/leaderboard-component';
+import { resultComponent } from './components/result-component';
+import Player from './interfaces/Player';
 
 export class Manager {
     private game: GameService | null;
@@ -8,6 +10,7 @@ export class Manager {
     private modal = document.getElementById('playerModal') as HTMLDivElement;
     private canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
     private gameOvertitle = document.getElementById('gameOvertitle') as HTMLDivElement;
+    private resultComponent = resultComponent;
 
     constructor() {
         this.game = null;
@@ -67,7 +70,14 @@ export class Manager {
         // On désactive le canvas et on reset le jeu
         this.toggleCanvas(false);
         this.game = null;
+
+        // On envoie le résultat au back
+        this.resultComponent.sendNewPlayerScore({
+            id: null,
+            name: this.nickname,
+            score: score
+        } as Player)
+
+        new LeaderboardComponent();
     }
 }
-
-const manager = new Manager();

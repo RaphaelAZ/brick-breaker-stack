@@ -25,6 +25,7 @@ export class App {
     private init() {
         this.app = express();
         this.app.use(cors());
+        this.app.use(express.json());
         this.app.use(helmet({
             crossOriginResourcePolicy: false,
         }));
