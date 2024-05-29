@@ -35,3 +35,4 @@ npm run start
 
 ### Lancement
 Après avoir installé les dépendances, vous pouvez lancer les serveurs backend et frontend avec les commandes appropriées.
+Bonne partie !
