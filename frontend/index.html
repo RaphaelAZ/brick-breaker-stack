@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brick Breaker Game</title>
-    
 </head>
 <body>
     <canvas id="gameCanvas" width="960" height="640" style="display: none;"></canvas>
+
     <div id="playerModal">
         <div id="playerModalContent">
-            <label for="nicknameInput">Entrez votre pseudo :</label>
+            <div class="gameOverTitle" id="gameOvertitle">
+                <h1>Game Over</h1>
+                <hr />
+            </div>
+            <label for="nicknameInput">Entrez votre pseudo</label>
             <input type="text" id="nicknameInput" name="nicknameInput">
-            <button id="startGameButton">Commencer le jeu</button>
+            <button id="startGameButton">Commencer une partie</button>
         </div>
     </div>
 

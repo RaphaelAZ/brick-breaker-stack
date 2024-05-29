@@ -3,7 +3,7 @@ import PaddleService from './paddleService';
 import BrickService from './brickService';
 
 class GameService {
-    private canvas: HTMLCanvasElement;
+    private canvas: HTMLCanvasElement = document.getElementById('gameCanvas') as HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private paddle: PaddleService;
     private ball: BallService;
@@ -18,13 +18,12 @@ class GameService {
     public isGameRunning: boolean;
 
     constructor(onGameOver: () => void) {
-        this.canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
         if (!this.canvas) {
-            throw new Error("Canvas introuvable");
+            throw new Error("Une erreur est survenue, veuillez contacter un administrateur.");
         }
         this.ctx = this.canvas.getContext('2d')!;
         this.paddle = new PaddleService(this.canvas);
-        this.ball = new BallService(this.canvas, this.paddle);
+        this.ball = new BallService(this.canvas, this.paddle, this);
         this.isGameOver = false;
         this.onGameOver = onGameOver;
         this.isGameRunning = true;
@@ -62,24 +61,19 @@ class GameService {
     }
 
     collisionDetection() {
-        for (let c = 0; c < this.brickColumnCount; c++) {
-            for (let r = 0; r < this.brickRowCount; r++) {
-                let b = this.bricks[c][r];
-                if (b.status === 1) {
-                    if (this.ball.x + this.ball.radius > b.x && this.ball.x - this.ball.radius < b.x + b.width && this.ball.y + this.ball.radius > b.y && this.ball.y - this.ball.radius < b.y + b.height) {
-                        this.ball.dy = -this.ball.dy;
-                        b.status = 0;
+        if(this.isGameRunning){
+            for (let c = 0; c < this.brickColumnCount; c++) {
+                for (let r = 0; r < this.brickRowCount; r++) {
+                    let b = this.bricks[c][r];
+                    if (b.status === 1) {
+                        if (this.ball.x + this.ball.radius > b.x && this.ball.x - this.ball.radius < b.x + b.width && this.ball.y + this.ball.radius > b.y && this.ball.y - this.ball.radius < b.y + b.height) {
+                            this.ball.dy = -this.ball.dy;
+                            b.status = 0;
+                            console.log('Brick cassée');
+                        }
                     }
                 }
             }
-        }
-    }
-
-    checkGameOver() {
-        if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.radius) {
-            this.isGameOver = true;
-            this.isGameRunning = false;
-            this.onGameOver();
         }
     }
 
@@ -95,11 +89,15 @@ class GameService {
         this.ball.move();
         this.paddle.move();
 
-        this.checkGameOver();
-
         if (!this.isGameOver) {
             requestAnimationFrame(this.draw);
         }
+    }
+
+    changeGameRunning() {
+        this.isGameOver = true;
+        this.isGameRunning = false;
+        this.onGameOver();
     }
 }
 

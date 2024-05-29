@@ -1,3 +1,41 @@
+@font-face {
+    font-family: 'Jaro';
+    src: url('../fonts/Jaro/Jaro-Regular-VariableFont_opsz.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Audiowide';
+    src: url('../fonts/Audiowide/Audiowide-Regular.ttf') format('truetype');
+}
+
+
+body {
+    font-family: 'Audiowide', sans-serif;
+}
+
+body {
+    background-color: black;
+    overflow: hidden;
+    position: relative;
+
+    .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+        0%, 100% {
+            opacity: 0.8;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+}
+
 #gameCanvas {
     display: block;
     margin: 0 auto;
@@ -19,12 +57,60 @@
 }
 
 #playerModalContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    gap: 1rem;
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 300px;
+    max-width: 400px;
+
+    .gameOverTitle {
+    display: none;
+    font-family: "Jaro", sans-serif;
+    color: #6a329f;
+    }
+
+    label {
+        font-size: 2rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        border: 2px solid #6a329f;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+        font-family: 'Audiowide', sans-serif;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        border: 2px solid #6a329f;
+        border-radius: 5px;
+        background-color: #6a329f;
+        color: #fff;
+        font-family: 'Audiowide', sans-serif;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #532781;
+        }
+    }
 }
 
 #startGameButton {

@@ -1,18 +1,23 @@
 import GameService from './services/gameService';
+import BackgroundService from './services/backgroundService';
 
 export class Manager {
     private game: GameService | null;
     private nickname: string | null;
+    private modal = document.getElementById('playerModal') as HTMLDivElement;
+    private canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
+    private gameOvertitle = document.getElementById('gameOvertitle') as HTMLDivElement;
+    private background: BackgroundService;
 
     constructor() {
+        this.background = new BackgroundService();
         this.game = null;
         this.nickname = null;
-
+        
         this.initModal();
     }
 
     private initModal(): void {
-        const modal = document.getElementById('playerModal') as HTMLDivElement;
         const startGameButton = document.getElementById('startGameButton') as HTMLButtonElement;
         const nicknameInput = document.getElementById('nicknameInput') as HTMLInputElement;
 
@@ -20,8 +25,8 @@ export class Manager {
             startGameButton.onclick = () => {
                 this.nickname = nicknameInput.value;
                 if (this.nickname && this.nickname.trim() !== '') {
-                    modal.style.display = 'none';
-                    this.showCanvas();
+                    this.toggleModal(false);
+                    this.toggleCanvas(true);
                     this.gameStart();
                 } else {
                     alert('Veuillez entrer un pseudo valide.');
@@ -29,23 +34,20 @@ export class Manager {
             };
         }
 
-        // Affiche la modal au chargement de la page
         window.onload = () => {
-            modal.style.display = 'block';
+            this.modal.style.display = 'block';
         };
     }
 
-    private showCanvas(): void {
-        const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
-        if (canvas) {
-            canvas.style.display = 'block';
+    private toggleCanvas(show: boolean): void {
+        if (this.canvas) {
+            this.canvas.style.display = show ? 'block' : 'none';
         }
     }
 
-    private hideCanvas(): void {
-        const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
-        if (canvas) {
-            canvas.style.display = 'none';
+    private toggleModal(show: boolean): void {
+        if (this.modal) {
+            this.modal.style.display = show ? 'block' : 'none';
         }
     }
 
@@ -54,10 +56,9 @@ export class Manager {
     }
 
     private onGameOver(): void {
-        const modal = document.getElementById('playerModal') as HTMLDivElement;
-        this.hideCanvas();
-        modal.style.display = 'block';
-        // Clear the game instance
+        this.modal.style.display = 'block';
+        this.gameOvertitle.style.display = 'block';
+        this.toggleCanvas(false);
         this.game = null;
     }
 }

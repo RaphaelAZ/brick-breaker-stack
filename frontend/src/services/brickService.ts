@@ -17,7 +17,7 @@ class BrickService {
         if (this.status === 1) {
             ctx.beginPath();
             ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.fillStyle = "#0095DD";
+            ctx.fillStyle = "#9333FF";
             ctx.fill();
             ctx.closePath();
         }

@@ -25,7 +25,7 @@ class PaddleService {
     draw() {
         this.ctx.beginPath();
         this.ctx.rect(this.x, this.canvas.height - this.height, this.width, this.height);
-        this.ctx.fillStyle = "#0095DD";
+        this.ctx.fillStyle = "#9333FF";
         this.ctx.fill();
         this.ctx.closePath();
     }

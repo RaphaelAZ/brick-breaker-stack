@@ -1,19 +1,22 @@
 import PaddleService from './paddleService';
+import GameService from './gameService';
 
 class BallService {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private paddle: PaddleService;
+    private game: GameService;
     public x: number;
     public y: number;
     public dx: number;
     public dy: number;
     public radius: number;
 
-    constructor(canvas: HTMLCanvasElement, paddle: PaddleService) {
+    constructor(canvas: HTMLCanvasElement, paddle: PaddleService, game: GameService) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d')!;
         this.paddle = paddle;
+        this.game = game;
         this.radius = 10;
         this.reset();
     }
@@ -28,7 +31,7 @@ class BallService {
     draw() {
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        this.ctx.fillStyle = "#0095DD";
+        this.ctx.fillStyle = "#9333FF";
         this.ctx.fill();
         this.ctx.closePath();
     }
@@ -64,7 +67,7 @@ class BallService {
                 this.dy = -4 * Math.cos(angle);
             } else if (this.y + this.dy > this.canvas.height - this.radius) {
                 
-                //La balle touche le sol et le jeu s'arrête
+                //La balle touche le sol -> le jeu s'arrête
                 this.dy = 0;
                 this.dx = 0;
                 this.onGameOver();
@@ -73,8 +76,7 @@ class BallService {
     }
 
     private onGameOver() {
-        console.log("Game Over");
-        // TODO: Game Over
+        this.game.changeGameRunning();
     }
 }
 
