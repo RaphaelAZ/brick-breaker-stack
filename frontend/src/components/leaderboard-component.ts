@@ -30,4 +30,11 @@ export default class LeaderboardComponent {
     private clearLeaderboard() {
         this.leaderboardElement.innerHTML = "";
     }
+
+    public refreshLeaderboard() {
+        this.clearLeaderboard();
+        this.loadLeaderboard();
+    }
 }
+
+export const leaderboardComponent = new LeaderboardComponent();

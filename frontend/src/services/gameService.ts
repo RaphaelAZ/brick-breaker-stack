@@ -29,9 +29,9 @@ class GameService {
         this.onGameOver = onGameOver;
         this.isGameRunning = true;
 
-        this.brickRowCount = 3;
-        this.brickColumnCount = 7;
-        this.brickPadding = 10;
+        this.brickRowCount = 5;
+        this.brickColumnCount = 9;
+        this.brickPadding = 8;
         this.brickOffsetTop = 30;
         this.brickOffsetLeft = (this.canvas.width - (this.brickColumnCount * (75 + this.brickPadding) - this.brickPadding)) / 2;
 

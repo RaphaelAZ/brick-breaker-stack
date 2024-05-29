@@ -1,6 +1,6 @@
 import GameService from './services/gameService';
 import BackgroundComponent from './components/background-component';
-import LeaderboardComponent from './components/leaderboard-component';
+import { leaderboardComponent } from './components/leaderboard-component';
 import { resultComponent } from './components/result-component';
 import Player from './interfaces/Player';
 
@@ -11,6 +11,7 @@ export class Manager {
     private canvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
     private gameOvertitle = document.getElementById('gameOvertitle') as HTMLDivElement;
     private resultComponent = resultComponent;
+    private leaderboardComponent = leaderboardComponent;
 
     constructor() {
         this.game = null;
@@ -18,7 +19,6 @@ export class Manager {
         
         this.initModal();
         new BackgroundComponent();
-        new LeaderboardComponent();
     }
 
     private initModal(): void {
@@ -78,6 +78,6 @@ export class Manager {
             score: score
         } as Player)
 
-        new LeaderboardComponent();
+        this.leaderboardComponent.refreshLeaderboard();
     }
 }
